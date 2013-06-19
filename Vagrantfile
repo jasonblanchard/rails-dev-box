@@ -5,6 +5,8 @@ Vagrant::Config.run do |config|
 
   config.vm.forward_port 3000, 3000
 
+  config.vm.share_folder("v-root", "/vagrant", ".", :nfs => true)
+
   config.vm.provision :puppet,
     :manifests_path => 'puppet/manifests',
     :module_path    => 'puppet/modules'
