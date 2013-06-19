@@ -164,3 +164,14 @@ service { 'redis-server':
   ensure  => running,
   require => Package['redis-server'],
 }
+
+# --- bash_profile ----
+
+exec {"echo 'alias ll=\"ls -l\"' >> ${home}/.bash_profile":
+    onlyif => 'grep -c ll .bash_profile'
+}
+
+# --- vim ------
+package { 'vim':
+    ensure => present,
+}
