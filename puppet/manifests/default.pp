@@ -168,7 +168,7 @@ service { 'redis-server':
 # --- bash_profile ----
 
 exec {"echo 'alias ll=\"ls -l\"' >> ${home}/.bash_profile":
-    onlyif => 'grep -c ll .bash_profile'
+    onlyif => "test `grep -c 'll=' ${home}/.bash_profile` = `echo 0`"
 }
 
 # --- vim ------
