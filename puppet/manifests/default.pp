@@ -21,6 +21,16 @@ class { 'apt_get_update':
   stage => preinstall
 }
 
+# --- MongoDB ---------------
+package { 'mongodb':
+  ensure => present,
+}
+
+service { 'mongodb':
+  ensure  => running,
+  require => Package['mongodb'],
+}
+
 # --- SQLite -------------------------------------------------------------------
 
 package { ['sqlite3', 'libsqlite3-dev']:
