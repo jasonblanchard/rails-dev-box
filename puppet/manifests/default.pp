@@ -180,3 +180,8 @@ package { 'vim':
 package { 'rails':
     ensure => present,
 }
+
+# --- ntp -------
+package { 'ntp':
+    ensure => present,
+}
