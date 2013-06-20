@@ -145,12 +145,12 @@ exec { 'install_ruby':
   # The rvm executable is more suitable for automated installs.
   #
   # Thanks to @mpapis for this tip.
-  command => "${as_vagrant} '${home}/.rvm/bin/rvm install 2.0.0 --latest-binary --autolibs=enabled && rvm --fuzzy alias create default 2.0.0'",
+  command => "${as_vagrant} '${home}/.rvm/bin/rvm install ruby-2.0.0-p0 --autolibs=enabled && rvm --fuzzy alias create default ruby-2.0.0-p0'",
   creates => "${home}/.rvm/bin/ruby",
   require => Exec['install_rvm']
 }
 
-exec { "${as_vagrant} 'gem install bundler --no-rdoc --no-ri'":
+exec { "${as_vagrant} 'gem install bundler --no-rdoc -/-no-ri'":
   creates => "${home}/.rvm/bin/bundle",
   require => Exec['install_ruby']
 }
@@ -173,5 +173,10 @@ exec {"echo 'alias ll=\"ls -l\"' >> ${home}/.bash_profile":
 
 # --- vim ------
 package { 'vim':
+    ensure => present,
+}
+
+# --- rails ------
+package { 'rails':
     ensure => present,
 }
