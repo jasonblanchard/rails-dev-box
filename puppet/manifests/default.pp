@@ -176,7 +176,7 @@ exec {"echo 'alias ll=\"ls -l\"' >> ${home}/.bash_profile":
 }
 
 exec {"echo 'export DISPLAY=:99' >> ${home}/.bash_profile":
-    onlyif => "test `grep -c 'export DISPLAY=:99' ${home}/.bash_profile` = `echo 0`"
+    onlyif => "test `grep -c 'DISPLAY=:99' ${home}/.bash_profile` = `echo 0`"
 }
 
 exec {"echo 'export PS1=\"\e[0;31m[\u@\h \W]\$ \e[m \"' >> ${home}/.bash_profile":
@@ -199,11 +199,16 @@ package { 'ntp':
 }
 
 # --- xvfb -------
-package { 'xvfb':
-    ensure => present,
+
+class xvfb {
+    package { 'xvfb':
+        ensure => present,
+    }
+
+    exec { 'Xvfb :99 -ac': }
 }
 
-exec { 'Xvfb :99 -ac': }
+include xvfb
 
 # --- Firefox -----
 exec { 'sudo add-apt-repository ppa:ubuntu-mozilla-security/ppa -y':
