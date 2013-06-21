@@ -183,6 +183,10 @@ exec {"echo 'export PS1=\"\e[0;33m[\u@\h \W]\$ \e[m \"' >> ${home}/.bash_profile
     onlyif => "test `grep -c 'PS1=' ${home}/.bash_profile` = `echo 0`"
 }
 
+exec {"echo 'Xvfb :99 -ac > /dev/null 2>&1 &' >> ${home}/.bash_profile":
+    onlyif => "test `grep -c 'Xvfb :99' ${home}/.bash_profile` = `echo 0`"
+}
+
 # --- vim ------
 package { 'vim':
     ensure => present,
@@ -200,17 +204,9 @@ package { 'ntp':
 
 # --- xvfb -------
 
-class xvfb {
-    package { 'xvfb':
-        ensure => present,
-    }
-
-    exec { 'Xvfb :99 -ac':
-        subscribe => Package['xvfb']
-    }
+package { 'xvfb':
+    ensure => present,
 }
-
-include xvfb
 
 # --- Firefox -----
 exec { 'sudo add-apt-repository ppa:ubuntu-mozilla-security/ppa -y':
