@@ -21,6 +21,10 @@ class { 'apt_get_update':
   stage => preinstall
 }
 
+package { 'python-software-properties':
+    ensure => present,
+}
+
 # --- MongoDB ---------------
 package { 'mongodb':
   ensure => present,
@@ -171,6 +175,10 @@ exec {"echo 'alias ll=\"ls -l\"' >> ${home}/.bash_profile":
     onlyif => "test `grep -c 'll=' ${home}/.bash_profile` = `echo 0`"
 }
 
+exec {"echo 'export DISPLAY=:99' >> ${home}/.bash_profile":
+    onlyif => "test `grep -c 'export DISPLAY=:99' ${home}/.bash_profile` = `echo 0`"
+}
+
 # --- vim ------
 package { 'vim':
     ensure => present,
@@ -183,5 +191,23 @@ package { 'rails':
 
 # --- ntp -------
 package { 'ntp':
+    ensure => present,
+}
+
+# --- xvfb -------
+package { 'xvfb':
+    ensure => present,
+}
+
+exec { 'Xvfb :99 -ac': }
+
+# --- Firefox -----
+exec { 'sudo add-apt-repository ppa:ubuntu-mozilla-security/ppa -y':
+}
+
+exec { 'sudo apt-get update':
+}
+
+package { 'firefox':
     ensure => present,
 }
