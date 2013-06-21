@@ -179,7 +179,7 @@ exec {"echo 'export DISPLAY=:99' >> ${home}/.bash_profile":
     onlyif => "test `grep -c 'DISPLAY=:99' ${home}/.bash_profile` = `echo 0`"
 }
 
-exec {"echo 'export PS1=\"\e[0;31m[\u@\h \W]\$ \e[m \"' >> ${home}/.bash_profile":
+exec {"echo 'export PS1=\"\e[0;33m[\u@\h \W]\$ \e[m \"' >> ${home}/.bash_profile":
     onlyif => "test `grep -c 'PS1=' ${home}/.bash_profile` = `echo 0`"
 }
 
