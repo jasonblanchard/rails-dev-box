@@ -3,7 +3,9 @@ Vagrant::Config.run do |config|
   config.vm.box_url   = 'http://files.vagrantup.com/precise32.box'
   config.vm.host_name = 'rails-dev-box'
 
-  config.vm.forward_port 3000, 3000
+  #config.vm.forward_port 3000, 3000
+  config.vm.network :hostonly, "33.33.33.10"
+  config.vm.share_folder("v-root", "/vagrant", ".", :nfs => true)
 
   config.vm.share_folder("v-root", "/vagrant", ".")
 
