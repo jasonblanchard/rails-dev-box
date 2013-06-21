@@ -205,7 +205,9 @@ class xvfb {
         ensure => present,
     }
 
-    exec { 'Xvfb :99 -ac': }
+    exec { 'Xvfb :99 -ac':
+        subscribe => Package['xvfb']
+    }
 }
 
 include xvfb
