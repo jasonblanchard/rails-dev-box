@@ -6,6 +6,7 @@ Vagrant::Config.run do |config|
   #config.vm.forward_port 3000, 3000
   config.vm.network :hostonly, "33.33.33.10"
   config.vm.share_folder("v-root", "/vagrant", ".", :nfs => true)
+  config.vm.customize ["setextradata", :id, "VBoxInternal2/SharedFoldersEnableSymlinksCreate/v-root", "1"]
 
   config.vm.share_folder("v-root", "/vagrant", ".")
 
