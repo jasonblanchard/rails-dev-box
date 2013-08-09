@@ -191,6 +191,10 @@ exec {"echo 'Xvfb :99 -ac > /dev/null 2>&1 &' >> ${home}/.bash_profile":
     onlyif => "test `grep -c 'Xvfb :99' ${home}/.bash_profile` = `echo 0`"
 }
 
+exec {"echo 'cd /vagrant/projects' >> ${home}/.bash_profile":
+    onlyif => "test `grep -c '/vagrant/projects' ${home}/.bash_profile` = `echo 0`"
+}
+
 # --- vim ------
 package { 'vim':
     ensure => present,
