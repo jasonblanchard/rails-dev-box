@@ -1,9 +1,9 @@
 Vagrant::Config.run do |config|
   config.vm.box       = 'precise32'
   config.vm.box_url   = 'http://files.vagrantup.com/precise32.box'
-  config.vm.host_name = 'rails-dev-box'
-  config.vm.customize ["modifyvm", :id, "--memory", 2048]
-  config.vm.customize ["modifyvm", :id, "--cpus", '2']
+  config.vm.host_name = 'apprennet-dev-box'
+  config.vm.customize ["modifyvm", :id, "--memory", 4048]
+  config.vm.customize ["modifyvm", :id, "--cpus", '4']
   config.vm.customize ["modifyvm", :id, "--ioapic", 'on']
   #config.vm.boot_mode = :gui
 
