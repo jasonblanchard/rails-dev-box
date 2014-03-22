@@ -5,6 +5,7 @@ Vagrant::Config.run do |config|
   config.vm.customize ["modifyvm", :id, "--memory", 2048]
   config.vm.customize ["modifyvm", :id, "--cpus", '2']
   config.vm.customize ["modifyvm", :id, "--ioapic", 'on']
+  #config.vm.boot_mode = :gui
 
 
   #config.vm.forward_port 3000, 3000
